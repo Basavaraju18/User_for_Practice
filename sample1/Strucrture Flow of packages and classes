@@ -1,0 +1,128 @@
+ Create an Entity Class for MySQL
+Since you're switching from MongoDB, you need to create JPA entity classes (MongoDB used @Document, but MySQL requires @Entity).
+
+Example Entity Class (User.java)
+java
+Copy
+Edit
+=================================================================================
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment ID
+    private Long id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "email", unique = true)
+    private String email;
+
+    // Constructors, Getters, Setters
+    public User() {}
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+}
+
+=================================================================================
+
+
+5️⃣ Create a Repository Interface
+MongoDB used MongoRepository, but in MySQL, you need JpaRepository.
+
+Example Repository (UserRepository.java)
+java
+Copy
+Edit
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    // Custom query methods (if needed)
+}
+
+
+=================================================================================
+
+
+6️⃣ Create a Simple Service and Controller
+Service Layer (UserService.java)
+java
+Copy
+Edit
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
+}
+
+=================================================================================
+
+
+Controller Layer (UserController.java)
+java
+Copy
+Edit
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/users")
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.getAllUsers();
+    }
+
+    @PostMapping
+    public User addUser(@RequestBody User user) {
+        return userService.saveUser(user);
+    }
+}
+
+=================================================================================
+
+
+7️⃣ Restart Your Spring Boot Application
+Run the application:
+
+sh
+Copy
+Edit
+mvn spring-boot:run
+OR
+Run from your IDE (Eclipse/STS/IntelliJ).

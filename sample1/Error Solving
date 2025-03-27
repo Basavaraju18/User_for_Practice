@@ -1,0 +1,11 @@
+
+
+2m2025-03-27T10:46:37.807+05:30[0;39m [31mERROR[0;39m [35m6896[0;39m [2m--- [Sample1] [nio-8080-exec-8] [0;39m[36mo.a.c.c.C.[.[.[/].[dispatcherServlet]   [0;39m [2m:[0;39m Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: jakarta.validation.ConstraintViolationException: Validation failed for classes [com.sample.sample1.Entity.User] during persist time for groups [jakarta.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='Name must be at least 3 characters', propertyPath=name, rootBeanClass=class com.sample.sample1.Entity.User, messageTemplate='Name must be at least 3 characters'}
+]] with root cause
+
+jakarta.validation.ConstraintViolationException: Validation failed for classes [com.sample.sample1.Entity.User] during persist time for groups [jakarta.validation.groups.Default, ]
+List of constraint violations:[
+	ConstraintViolationImpl{interpolatedMessage='Name must be at least 3 characters', propertyPath=name, rootBeanClass=class com.sample.sample1.Entity.User, messageTemplate='Name must be at least 3 characters'}
+]
