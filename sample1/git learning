@@ -1,0 +1,84 @@
+The git push operation is used to send your local commits to a remote repository (like GitHub). Here’s a step-by-step guide on how to use git push effectively in your Git workflow.
+
+
+Basic git push Usage
+1. Push changes to the current branch
+If you have made changes and committed them locally, you can push them to the remote repository:
+  > git push origin <branch-name>
+  ex : For example, if you are on the main branch:
+  
+  > git push origin main
+  or for the devlop branch:
+  >git push origin devlop
+
+2. Push a New Local Branch to Remote
+If you have created a new branch and want to push it to GitHub:
+ 	> git push --set-upstream origin <branch-name>
+ 	
+ 	ex Example:
+
+	>git push --set-upstream origin devlop
+	Now, Git will remember this remote branch, and next time, you can simply use:
+
+	>git push
+	
+	
+	3. Push After Merging Another Branch
+	If you have merged changes from main into devlop, and you want to push them:
+	
+	git checkout devlop
+	git merge main
+	git push origin devlop
+	
+	
+	. Push Changes Forcefully (Use with Caution!)
+	If you made changes locally that overwrite the remote branch history (not recommended unless necessary):
+
+
+	git push --force
+	⚠ Warning: This will overwrite history on the remote repository, so be careful!
+
+	5. Push All Local Branches
+	If you want to push all local branches to the remote repository:
+	
+
+	git push --all origin
+	
+	
+	6. Push Tags (if you use version tagging)
+	To push all tags to the remote repository:
+
+	
+	git push --tags
+	========================
+	
+	Common Issues & Fixes
+	Error: ‘rejected’ (fetch first)
+
+	This happens when your remote branch has new commits that are not in your local branch. Fix it by pulling the 	latest changes before pushing:
+	
+	
+	git pull --rebase origin <branch-name>
+	git push origin <branch-name>
+	
+	
+	
+	Authentication Error
+
+	If you are asked for a username and password but want to use SSH instead, check if your remote URL is set to 	HTTPS. Convert it to SSH:
+
+	git remote set-url origin git@github.com:Basavaraju18/User_for_Practice.git
+	Then try pushing again.
+
+	
+
+	
+	
+	
+
+
+
+
+
+
+
