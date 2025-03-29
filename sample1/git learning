@@ -70,7 +70,75 @@ If you have created a new branch and want to push it to GitHub:
 	git remote set-url origin git@github.com:Basavaraju18/User_for_Practice.git
 	Then try pushing again.
 
+	=====================================================================================
 	
+	Your `git status` output shows that you have **untracked files**, meaning they are new and not yet added to version control. To proceed with `git push`, follow these steps:
+
+---
+
+### **1. Add Untracked Files**
+To include these new files in your commit, use:
+```bash
+git add .
+```
+or add specific files:
+```bash
+git add sample1/IT\ Experience sample1/Implimentaion\ Tasks\ In\ Project sample1/git\ learning
+```
+(`\` is used to escape spaces in file names)
+
+---
+
+### **2. Commit the Changes**
+Once the files are added, commit them with a meaningful message:
+```bash
+git commit -m "Added IT Experience, Implementation Tasks, and Git Learning files"
+```
+
+---
+
+### **3. Push the Changes to Remote Repository**
+Since you're on the `develop` branch, push the changes using:
+```bash
+git push origin develop
+```
+
+If this is your first time pushing this branch, set the upstream branch:
+```bash
+git push --set-upstream origin develop
+```
+After this, next time, simply using `git push` will work.
+
+---
+
+### **4. Verify the Push**
+After pushing, check the status to confirm everything is up to date:
+```bash
+git status
+```
+If it shows **"Your branch is up to date with 'origin/develop'."**, your push was successful! 🎉
+
+---
+
+### **Common Issues & Fixes**
+1. **Error: Rejected (fetch first)**
+   - Run:
+     ```bash
+     git pull --rebase origin develop
+     git push origin develop
+     ```
+   - This syncs your local branch with the remote before pushing.
+
+2. **Permission Denied (Public Key)**
+   - Check if SSH is set up correctly using:
+     ```bash
+     ssh -T git@github.com
+     ```
+   - If not, set up SSH authentication.
+
+---
+
+Once you've completed these steps, your files should be successfully pushed to GitHub! 🚀 Let me know if you face any issues.
 
 	
 	
