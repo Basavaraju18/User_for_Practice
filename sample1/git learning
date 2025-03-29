@@ -1,0 +1,152 @@
+The git push operation is used to send your local commits to a remote repository (like GitHub). Here’s a step-by-step guide on how to use git push effectively in your Git workflow.
+
+
+Basic git push Usage
+1. Push changes to the current branch
+If you have made changes and committed them locally, you can push them to the remote repository:
+  > git push origin <branch-name>
+  ex : For example, if you are on the main branch:
+  
+  > git push origin main
+  or for the devlop branch:
+  >git push origin devlop
+
+2. Push a New Local Branch to Remote
+If you have created a new branch and want to push it to GitHub:
+ 	> git push --set-upstream origin <branch-name>
+ 	
+ 	ex Example:
+
+	>git push --set-upstream origin devlop
+	Now, Git will remember this remote branch, and next time, you can simply use:
+
+	>git push
+	
+	
+	3. Push After Merging Another Branch
+	If you have merged changes from main into devlop, and you want to push them:
+	
+	git checkout devlop
+	git merge main
+	git push origin devlop
+	
+	
+	. Push Changes Forcefully (Use with Caution!)
+	If you made changes locally that overwrite the remote branch history (not recommended unless necessary):
+
+
+	git push --force
+	⚠ Warning: This will overwrite history on the remote repository, so be careful!
+
+	5. Push All Local Branches
+	If you want to push all local branches to the remote repository:
+	
+
+	git push --all origin
+	
+	
+	6. Push Tags (if you use version tagging)
+	To push all tags to the remote repository:
+
+	
+	git push --tags
+	========================
+	
+	Common Issues & Fixes
+	Error: ‘rejected’ (fetch first)
+
+	This happens when your remote branch has new commits that are not in your local branch. Fix it by pulling the 	latest changes before pushing:
+	
+	
+	git pull --rebase origin <branch-name>
+	git push origin <branch-name>
+	
+	
+	
+	Authentication Error
+
+	If you are asked for a username and password but want to use SSH instead, check if your remote URL is set to 	HTTPS. Convert it to SSH:
+
+	git remote set-url origin git@github.com:Basavaraju18/User_for_Practice.git
+	Then try pushing again.
+
+	=====================================================================================
+	
+	Your `git status` output shows that you have **untracked files**, meaning they are new and not yet added to version control. To proceed with `git push`, follow these steps:
+
+---
+
+### **1. Add Untracked Files**
+To include these new files in your commit, use:
+```bash
+git add .
+```
+or add specific files:
+```bash
+git add sample1/IT\ Experience sample1/Implimentaion\ Tasks\ In\ Project sample1/git\ learning
+```
+(`\` is used to escape spaces in file names)
+
+---
+
+### **2. Commit the Changes**
+Once the files are added, commit them with a meaningful message:
+```bash
+git commit -m "Added IT Experience, Implementation Tasks, and Git Learning files"
+```
+
+---
+
+### **3. Push the Changes to Remote Repository**
+Since you're on the `develop` branch, push the changes using:
+```bash
+git push origin develop
+```
+
+If this is your first time pushing this branch, set the upstream branch:
+```bash
+git push --set-upstream origin develop
+```
+After this, next time, simply using `git push` will work.
+
+---
+
+### **4. Verify the Push**
+After pushing, check the status to confirm everything is up to date:
+```bash
+git status
+```
+If it shows **"Your branch is up to date with 'origin/develop'."**, your push was successful! 🎉
+
+---
+
+### **Common Issues & Fixes**
+1. **Error: Rejected (fetch first)**
+   - Run:
+     ```bash
+     git pull --rebase origin develop
+     git push origin develop
+     ```
+   - This syncs your local branch with the remote before pushing.
+
+2. **Permission Denied (Public Key)**
+   - Check if SSH is set up correctly using:
+     ```bash
+     ssh -T git@github.com
+     ```
+   - If not, set up SSH authentication.
+
+---
+
+Once you've completed these steps, your files should be successfully pushed to GitHub! 🚀 Let me know if you face any issues.
+
+	
+	
+	
+
+
+
+
+
+
+

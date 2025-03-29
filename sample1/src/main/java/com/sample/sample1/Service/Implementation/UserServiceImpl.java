@@ -47,8 +47,6 @@ public class UserServiceImpl implements UserService {
 		    } else {
 		        throw new UserNotFoundException("User not found with ID: " + userId);
 		    }
-			
-		
 	}
 
 	@Override
