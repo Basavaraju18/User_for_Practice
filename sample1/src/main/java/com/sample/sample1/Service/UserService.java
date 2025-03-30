@@ -14,5 +14,6 @@ public interface UserService {
 	List<User> getAllUsers();  //read
 	User saveUser(User user); //add
 	UserResponse updateUser(Long userId, String name, String email) throws  Exception;
+	List<User> serchStudentsByName(String name);
 
 }

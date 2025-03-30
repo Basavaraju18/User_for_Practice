@@ -99,6 +99,15 @@ public class UserServiceImpl implements UserService {
         
         return new UserResponse(savedUser, logMessages);
     }
+
+	@Override
+	public List<User> serchStudentsByName(String name) {
+		List<User> user = userRepository.findByNameContainingIgnoreCase(name);
+		if(user.isEmpty() ) {
+			throw new UserNotFoundException(name);
+		}
+		return userRepository.findByNameContainingIgnoreCase(name);
+	}
 }
 
 
