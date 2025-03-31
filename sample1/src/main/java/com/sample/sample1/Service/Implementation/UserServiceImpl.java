@@ -46,15 +46,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User saveUser(User user) {
+	public User saveUser(User user) {	
 		return userRepository.save(user);
 	}
 	
 	@Override
 	public UserResponse updateUser(Long id, String name, String email) throws IllegalArgumentException {
-		List<String> logMessages = new ArrayList<>();
 		
-		logMessages.add("Updating user with the Id: "+ id);
 		
 		logger.info("Updateing user with Id : {}", id);
 		
@@ -62,7 +60,6 @@ public class UserServiceImpl implements UserService {
 //                .orElseThrow(() -> new RuntimeException("User not found"));
         		  .orElseThrow(() -> {
         			String errorMsg = "User not found";
-        			logMessages.add(errorMsg);
         			logger.error(errorMsg);
         			return new RuntimeException(errorMsg);
         		  });
@@ -71,7 +68,6 @@ public class UserServiceImpl implements UserService {
         	if(name.length() < 3) {
 //        		logger.warn("Invalid name provided for user ID {}: {}", id, name);
         		String warningsMsg = "Invalid name probvided for user ID "+ id + ": "+ name;
-        		logMessages.add(warningsMsg);
         		logger.warn(warningsMsg);
         		throw new IllegalArgumentException("Name must be at least 3 characters long.");
         	}
@@ -84,7 +80,6 @@ public class UserServiceImpl implements UserService {
         	if(existingUser.isPresent() && !existingUser.get().getId().equals(id)) {
 //        		logger.warn("Dupicate Email attempt : {}", email);
         		String warningMsg = "Duplicate email attemp: "+ email;
-        		logMessages.add(warningMsg);
         		logger.warn(warningMsg);
         		
         		throw new IllegalArgumentException("Email is already in use.Please choose another one email");
@@ -94,14 +89,13 @@ public class UserServiceImpl implements UserService {
         }
 
         User savedUser =  userRepository.save(user);
-        logMessages.add("Usser wiith ID "+ id +" updated successfully.");
         logger.info("User with ID {} updated successfully", id);
         
-        return new UserResponse(savedUser, logMessages);
+        return new UserResponse(savedUser, "User updated successfully.");
     }
 
 	@Override
-	public List<User> serchStudentsByName(String name) {
+	public List<User> serchUsersByName(String name) {
 		List<User> user = userRepository.findByNameContainingIgnoreCase(name);
 		if (user.isEmpty() ) {
 			throw new UserNotFoundException(name);
