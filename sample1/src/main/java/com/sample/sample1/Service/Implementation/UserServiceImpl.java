@@ -103,10 +103,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> serchStudentsByName(String name) {
 		List<User> user = userRepository.findByNameContainingIgnoreCase(name);
-		if(user.isEmpty() ) {
+		if (user.isEmpty() ) {
 			throw new UserNotFoundException(name);
 		}
-		return userRepository.findByNameContainingIgnoreCase(name);
+		return user;
 	}
 }
 
