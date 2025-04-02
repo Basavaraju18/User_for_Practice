@@ -15,5 +15,6 @@ public interface UserService {
 	User saveUser(User user); //add
 	UserResponse updateUser(Long userId, String name, String email) throws  Exception;
 	List<User> serchUsersByName(String name);
+	void deleteUser(Long userId);
 
 }
