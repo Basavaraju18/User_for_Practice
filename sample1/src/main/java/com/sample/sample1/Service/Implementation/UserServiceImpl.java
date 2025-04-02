@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository; // Inject Repository
 
-    
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
     
 	@Override
@@ -102,6 +101,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+
+	
+	@Override
+	public void deleteUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        userRepository.delete(user);
+    }
 }
 
 
