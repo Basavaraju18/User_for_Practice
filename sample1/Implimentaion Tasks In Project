@@ -1,1 +1,59 @@
 1.Would you like help implementing JWT authentication or Swagger documentation first?
+
+In service class
+Pending in 
+
+	public ResponseEntity<ResponseStructure<StudentResponse>> saveStudent(StudentRequest studentRequest);
+	public ResponseEntity<ResponseStructure<StudentResponse>> updateStudent(Student student,int studentId);
+	public ResponseEntity<ResponseStructure<Student>> deleteStudent(int studentId);
+	public ResponseEntity<ResponseStructure<Student>> findStudentById(int studentId);
+	public ResponseEntity<ResponseStructure<List<Student>>> findAllStudent();
+
+	public ResponseEntity<ResponseStructure<StudentResponse>> findByEmail(String studentEmail);
+	public ResponseEntity<String> extractDataFromExcel(MultipartFile file) throws IOException;
+	public ResponseEntity<String> writeToExcel(String filePath) throws IOException;
+	
+	<> : Generics we used here:
+	
+	Great question!
+
+The `<>` syntax you're referring to is called **Java Generics**. It allows you to specify **parameterized types**—in other words, it makes your code more 
+type-safe and flexible.
+
+Let’s break down this part of your method declaration:
+
+```java
+ResponseEntity<ResponseStructure<StudentResponse>>
+```
+
+### Explanation:
+- `ResponseEntity<T>` is a Spring class used to represent the **HTTP response**, including the body, status code, and headers.
+- Inside the angle brackets `< >`, you're specifying the **type of data** that the response body will contain.
+- In this case, the body is of type `ResponseStructure<StudentResponse>`.
+- `ResponseStructure<T>` is probably your **custom wrapper class** that holds the actual data (`StudentResponse`) along with maybe status, message, timestamp, etc.
+- `StudentResponse` is likely a **DTO (Data Transfer Object)** containing student details that will be returned to the client.
+
+### Analogy:
+If we think in layers:
+
+- `StudentResponse` → actual student data
+- `ResponseStructure<StudentResponse>` → wraps the student data with meta info like message, status
+- `ResponseEntity<ResponseStructure<StudentResponse>>` → wraps the whole thing with HTTP status and headers
+
+### Why use this?
+1. ✅ **Type safety** – The compiler ensures you're handling the right types.
+2. ✅ **Clean code** – Reusable wrapper classes (`ResponseStructure<T>`) make your API responses consistent.
+3. ✅ **IntelliSense help** – Better auto-complete in IDEs.
+
+Let me know if you want a visual or code example of how `ResponseStructure` might be written!
+	
+	User getUserById(Long userId);
+	List<User> getAllUsers();  //read
+	User saveUser(User user); //add
+	UserResponse updateUser(Long userId, String name, String email) throws  Exception;
+	List<User> serchUsersByName(String name);
+	void deleteUser(Long userId);
+	
+	
+	
+	
